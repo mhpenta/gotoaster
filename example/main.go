@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"time"
 
-	goaster "github.com/mhpena/gotoaster"
+	gotoaster "github.com/mhpena/gotoaster"
 	g "maragu.dev/gomponents"
 	c "maragu.dev/gomponents/components"
 	h "maragu.dev/gomponents/html"
@@ -21,8 +21,8 @@ func main() {
 }
 
 // Global toaster instance
-var toaster = goaster.NewToaster().
-	SetPosition(goaster.TopRight).
+var toaster = gotoaster.NewToaster().
+	SetPosition(gotoaster.TopRight).
 	SetMaxToasts(5)
 
 func handleHome(w http.ResponseWriter, r *http.Request) {
@@ -56,7 +56,7 @@ func handleHome(w http.ResponseWriter, r *http.Request) {
 			),
 
 			// Render the toaster component
-			goaster.ToasterComponent(toaster),
+			gotoaster.ToasterComponent(toaster),
 		),
 	)
 
@@ -213,7 +213,7 @@ func handleHome(w http.ResponseWriter, r *http.Request) {
     transform: scaleX(0);
   }
 }</style>`),
-			goaster.ToasterCSS(),
+			gotoaster.ToasterCSS(),
 		},
 		Body: []g.Node{body},
 	})
@@ -224,18 +224,18 @@ func handleHome(w http.ResponseWriter, r *http.Request) {
 func handleAddToast(w http.ResponseWriter, r *http.Request) {
 	level := r.URL.Query().Get("level")
 
-	var toastLevel goaster.Level
+	var toastLevel gotoaster.Level
 	switch level {
 	case "success":
-		toastLevel = goaster.SuccessLevel
+		toastLevel = gotoaster.SuccessLevel
 	case "error":
-		toastLevel = goaster.ErrorLevel
+		toastLevel = gotoaster.ErrorLevel
 	case "warning":
-		toastLevel = goaster.WarningLevel
+		toastLevel = gotoaster.WarningLevel
 	case "info":
-		toastLevel = goaster.InfoLevel
+		toastLevel = gotoaster.InfoLevel
 	default:
-		toastLevel = goaster.DefaultLevel
+		toastLevel = gotoaster.DefaultLevel
 	}
 
 	// Create a message based on the level
@@ -245,7 +245,7 @@ func handleAddToast(w http.ResponseWriter, r *http.Request) {
 	)
 
 	// Create the toast and add it to the toaster
-	toast := goaster.NewToastWithDuration(message, toastLevel, 2*time.Second)
+	toast := gotoaster.NewToastWithDuration(message, toastLevel, 2*time.Second)
 	toaster.AddToast(toast)
 
 	w.WriteHeader(http.StatusOK)
