@@ -1,6 +1,6 @@
 # GoToaser
 
-A lightweight toast notification system for Go web applications, built with [gomponents](https://github.com/maragudk/gomponents). Inspired by goaster.
+A lightweight toast notification system for Go web applications, built with [gomponents](https://github.com/maragudk/gomponents). Inspired by [goaster](https://github.com/indaco/goaster).
 
 ## Features
 
@@ -25,7 +25,7 @@ package main
 import (
     "net/http"
 
-    goaster "github.com/mhpenta/gotoaster"
+    "github.com/mhpenta/gotoaster"
     g "maragu.dev/gomponents"
     h "maragu.dev/gomponents/html"
 )
@@ -36,24 +36,24 @@ func main() {
 }
 
 // Create a toaster
-var toaster = goaster.NewToaster().
-    SetPosition(goaster.TopRight)
+var toaster = gotoaser.NewToaster().
+    SetPosition(gotoaser.TopRight)
 
 func handleHome(w http.ResponseWriter, r *http.Request) {
     // Add a toast
-    toast := goaster.NewToast("Hello World!", goaster.SuccessLevel)
+    toast := gotoaser.NewToast("Hello World!", gotoaser.SuccessLevel)
     toaster.AddToast(toast)
     
     // Render page with toaster
     page := h.HTML(
         h.Head(
             h.Title("GoToaser Example"),
-            goaster.ToasterCSS(),
+            gotoaser.ToasterCSS(),
         ),
         h.Body(
             h.Div(
                 h.H1(g.Text("GoToaser Demo")),
-                goaster.ToasterComponent(toaster),
+                gotoaser.ToasterComponent(toaster),
             ),
         ),
     )
@@ -66,10 +66,10 @@ func handleHome(w http.ResponseWriter, r *http.Request) {
 
 ```go
 // Create a new toaster
-toaster := goaster.NewToaster()
+toaster := gotoaser.NewToaster()
 
 // Customize
-toaster.SetPosition(goaster.BottomCenter)
+toaster.SetPosition(gotoaser.BottomCenter)
 toaster.SetMaxToasts(3)
 toaster.SetAutoRemove(true)
 ```
